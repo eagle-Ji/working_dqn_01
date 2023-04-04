@@ -62,7 +62,7 @@ class SimpleDrivingEnv(gym.Env):
             time.sleep(self._timeStep)
 
           carpos, carorn = self._p.getBasePositionAndOrientation(self.car.car)
-          ballpos, ballorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
+          goalpos, goalorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
           car_ob = self.getExtendedObservation()
 
           if self._termination():
@@ -73,8 +73,8 @@ class SimpleDrivingEnv(gym.Env):
         # Compute reward as L2 change in distance to goal
         # dist_to_goal = math.sqrt(((car_ob[0] - self.goal[0]) ** 2 +
                                   # (car_ob[1] - self.goal[1]) ** 2))
-        dist_to_goal = math.sqrt(((carpos[0] - ballpos[0]) ** 2 +
-                                  (carpos[1] - ballpos[1]) ** 2))
+        dist_to_goal = math.sqrt(((carpos[0] - goalpos[0]) ** 2 +
+                                  (carpos[1] - goalpos[1]) ** 2))
         # reward = max(self.prev_dist_to_goal - dist_to_goal, 0)
         reward = -dist_to_goal
         self.prev_dist_to_goal = dist_to_goal
@@ -173,11 +173,11 @@ class SimpleDrivingEnv(gym.Env):
     def getExtendedObservation(self):
         # self._observation = []  #self._racecar.getObservation()
         carpos, carorn = self._p.getBasePositionAndOrientation(self.car.car)
-        ballpos, ballorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
+        goalpos, goalorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
         invCarPos, invCarOrn = self._p.invertTransform(carpos, carorn)
-        ballPosInCar, ballOrnInCar = self._p.multiplyTransforms(invCarPos, invCarOrn, ballpos, ballorn)
+        goalPosInCar, goalOrnInCar = self._p.multiplyTransforms(invCarPos, invCarOrn, goalpos, goalorn)
 
-        observation = [ballPosInCar[0], ballPosInCar[1]]
+        observation = [goalPosInCar[0], goalPosInCar[1]]
         return observation
 
     def _termination(self):

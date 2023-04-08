@@ -1,3 +1,7 @@
+Modifications:
+* Added third-person and on-board camera rendering modes.
+* Made runnable on google colab notebook
+
 # Gym-Medium-Post
 Basic OpenAI gym environment. 
 

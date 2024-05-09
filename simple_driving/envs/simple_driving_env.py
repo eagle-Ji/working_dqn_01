@@ -64,10 +64,10 @@ class SimpleDrivingEnv(gym.Env):
           carpos, carorn = self._p.getBasePositionAndOrientation(self.car.car)
           goalpos, goalorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
           car_ob = self.getExtendedObservation()
-          print(f" Step Count  : {self._envStepCounter}")
+          #print(f" Step Count  : {self._envStepCounter}")
           if self._termination():
             
-            self.done = True
+            #self.done = True
             break
           self._envStepCounter += 1
 

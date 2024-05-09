@@ -79,7 +79,7 @@ class SimpleDrivingEnv(gym.Env):
         # reward = max(self.prev_dist_to_goal - dist_to_goal, 0)
         reward = -dist_to_goal
         self.prev_dist_to_goal = dist_to_goal
-
+        print(f"reward {reward}")
         # Done by reaching goal
         if dist_to_goal < 1.5 and not self.reached_goal:
             print("reached goal")

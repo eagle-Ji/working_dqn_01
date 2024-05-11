@@ -65,10 +65,10 @@ class SimpleDrivingEnv(gym.Env):
           goalpos, goalorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
           car_ob = self.getExtendedObservation()
           #print(f" Step Count  : {self._envStepCounter}")
-          if self._termination():
+          #if self._termination():
             
-            self.done = True
-            break
+            #self.done = True
+            #break
           self._envStepCounter += 1
 
         # Compute reward as L2 change in distance to goal

@@ -23,8 +23,8 @@ class SimpleDrivingEnv(gym.Env):
                 low=np.array([-1, -.6], dtype=np.float32),
                 high=np.array([1, .6], dtype=np.float32))
         self.observation_space = gym.spaces.box.Box(
-            low=np.array([-40, -40], dtype=np.float32),
-            high=np.array([40, 40], dtype=np.float32))
+            low=np.array([-40, -40, -40, -40,-40, -40,-40,-40, -40], dtype=np.float32),
+            high=np.array([40, 40, 40, 40, 40, 40, 40, 40, 40], dtype=np.float32))
         self.np_random, _ = gym.utils.seeding.np_random()
 
         if renders:
@@ -33,7 +33,7 @@ class SimpleDrivingEnv(gym.Env):
           self._p = bc.BulletClient()
 
         self.reached_goal = False
-        self._timeStep = 0.01
+        self._timeStep = 0.001
         self._actionRepeat = 50
         self._renders = renders
         self._isDiscrete = isDiscrete

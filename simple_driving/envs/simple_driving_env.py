@@ -86,7 +86,6 @@ class SimpleDrivingEnv(gym.Env):
             reward += 50
             self.done = True
             self.reached_goal = True
-        car_ob.append(dist_to_goal)
         ob = car_ob
         return ob, reward, self.done, dict()
 
@@ -184,10 +183,11 @@ class SimpleDrivingEnv(gym.Env):
         goalpos, goalorn = self._p.getBasePositionAndOrientation(self.goal_object.goal)
         invCarPos, invCarOrn = self._p.invertTransform(carpos, carorn)
         goalPosInCar, goalOrnInCar = self._p.multiplyTransforms(invCarPos, invCarOrn, goalpos, goalorn)
-
+        dist_to_goal = math.sqrt(((carpos[0] - goalpos[0]) ** 2 +
+                                  (carpos[1] - goalpos[1]) ** 2))
         observation = [goalPosInCar[0], goalPosInCar[1], 
                        goalOrnInCar[0], goalOrnInCar[1], 
-                       carpos[0],carpos[1], carorn[0], carorn[1]]
+                       carpos[0],carpos[1], carorn[0], carorn[1], dist_to_goal]
         return observation
 
     def _termination(self):

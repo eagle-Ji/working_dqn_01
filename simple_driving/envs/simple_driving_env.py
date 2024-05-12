@@ -185,7 +185,9 @@ class SimpleDrivingEnv(gym.Env):
         invCarPos, invCarOrn = self._p.invertTransform(carpos, carorn)
         goalPosInCar, goalOrnInCar = self._p.multiplyTransforms(invCarPos, invCarOrn, goalpos, goalorn)
 
-        observation = [goalPosInCar[0], goalPosInCar[1]]
+        observation = [goalPosInCar[0], goalPosInCar[1], 
+                       goalOrnInCar[0], goalOrnInCar[1], 
+                       carpos[0],carpos[1], carorn[0], carorn[1]]
         return observation
 
     def _termination(self):

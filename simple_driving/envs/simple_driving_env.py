@@ -33,7 +33,7 @@ class SimpleDrivingEnv(gym.Env):
           self._p = bc.BulletClient()
 
         self.reached_goal = False
-        self._timeStep = 0.001
+        self._timeStep = 0.01
         self._actionRepeat = 50
         self._renders = renders
         self._isDiscrete = isDiscrete
@@ -191,7 +191,7 @@ class SimpleDrivingEnv(gym.Env):
         return observation
 
     def _termination(self):
-        return self._envStepCounter > 2000
+        return self._envStepCounter > 4000
 
     def close(self):
         self._p.disconnect()
